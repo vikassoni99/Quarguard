@@ -8,36 +8,33 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class activity_registration extends AppCompatActivity {
+public class Activity_Login extends AppCompatActivity {
 
-    Button createBtn;
+    Button createNewBtn;
     Button loginBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_registration);
-        createBtn=findViewById(R.id.Btn_CreateAcc);
-        loginBtn=findViewById(R.id.TextBtn_login);
+        setContentView(R.layout.layout_login);
 
-        createBtn.setOnClickListener(new View.OnClickListener() {
+        createNewBtn=findViewById(R.id.TextBtn_createANewAcc);
+        loginBtn=findViewById(R.id.Btn_Login);
+
+        createNewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_registerToMain =new  Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent_registerToMain);
+                Intent intent_loginToSignup =new  Intent(getApplicationContext(), Activity_Registration.class);
+                startActivity(intent_loginToSignup);
             }
         });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_registerToLogin =new  Intent(getApplicationContext(),activity_login.class);
-                startActivity(intent_registerToLogin);
+                Intent intent_loginToMain =new  Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent_loginToMain);
             }
         });
-
-
-
-
     }
 }

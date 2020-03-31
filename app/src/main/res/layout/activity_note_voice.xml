@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="12dp"
+    android:background="#fff"
+    tools:context=".NoteVoiceOptional.NoteVoiceActivity">
+    <Button
+        android:id="@+id/btnRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Record Voice Note" />
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Recording" />
+    <Button
+        android:id="@+id/btnPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Recorded Note" />
+    <Button
+        android:id="@+id/btnStopPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Playing Recorded Note"
+        />
+
+    <Button
+        android:id="@+id/btn_upload_voice_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Recorded Voice Note"
+        />
+</LinearLayout>

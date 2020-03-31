@@ -10,8 +10,9 @@
         android:layout_height="wrap_content"
         android:text="Create Account"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="38dp"
+        android:textSize="30dp"
         android:textStyle="bold"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="@id/guidelineV2"
         app:layout_constraintStart_toStartOf="@id/guidelineV1"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,9 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="20dp"
         android:text="Create a new account"
-        android:textColor="@color/colorLightGrey"
+        android:textColor="@color/colorGrey"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@id/textFieldPatientName"
         app:layout_constraintEnd_toEndOf="@id/guidelineV2"
@@ -35,17 +35,19 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:hint="Your Name"
         android:textColorHint="@color/colorAccent"
         app:boxStrokeColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="@id/guidelineV2"
         app:layout_constraintStart_toStartOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@id/txt_createAcc">
+        app:layout_constraintTop_toBottomOf="@id/txt_createNewAcc">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,8 +56,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         android:hint="Age"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:textColorHint="@color/colorAccent"
         app:boxStrokeColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="@id/guidelineV2"
@@ -74,8 +78,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         android:hint="Nationality"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:textColorHint="@color/colorAccent"
         app:boxStrokeColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="@id/guidelineV2"
@@ -93,7 +99,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:hint="State"
         android:textColorHint="@color/colorAccent"
         app:boxStrokeColor="@color/colorAccent"
@@ -112,7 +120,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:hint="City"
         android:textColorHint="@color/colorAccent"
         app:boxStrokeColor="@color/colorAccent"
@@ -137,41 +147,41 @@
         android:text="CREATE ACCOUNT"
         android:textColor="#ffffff"
         android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@id/LinearLayoutForLogin"
         app:layout_constraintEnd_toEndOf="@id/guidelineV2"
         app:layout_constraintStart_toStartOf="@id/guidelineV1"
-        app:layout_constraintTop_toBottomOf="@id/textFieldCity"
-        app:layout_constraintBottom_toTopOf="@id/LinearLayoutForLogin"/>
+        app:layout_constraintTop_toBottomOf="@id/textFieldCity" />
 
     <LinearLayout
         android:id="@+id/LinearLayoutForLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guidelineV1"
-        app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@id/guidelineH2"
-        android:gravity="center">
+        app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+        app:layout_constraintStart_toStartOf="@id/guidelineV1"
+        app:layout_constraintTop_toBottomOf="@id/Btn_CreateAcc">
 
 
         <TextView
             android:id="@+id/txt_alreadyHaveAcc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create a new account ? "
-            android:textColor="@color/colorLightGrey"
-            android:textSize="16dp"/>
+            android:text="Already have an account ?"
+            android:textColor="@color/colorGrey"
+            android:textSize="16dp" />
+
         <Button
             android:id="@+id/TextBtn_login"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:textSize="16dp"
             android:textColor="@color/colorAccent"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            />
+            android:textSize="16dp" />
 
 
     </LinearLayout>
-
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -193,6 +203,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.99" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

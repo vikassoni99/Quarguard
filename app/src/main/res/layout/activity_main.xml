@@ -9,14 +9,31 @@
     tools:context=".MainActivity">
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/request_location_updates_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/request_location_updates" />
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/remove_location_updates_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/remove_location_updates" />
+
+    <Button
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Panic Mode"
+        android:id="@+id/btn_panic_mode"/>
+
+    <Button
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Locate me in every 1 hour"
+        android:id="@+id/btn_location_1_hr"/>
+
 </LinearLayout>

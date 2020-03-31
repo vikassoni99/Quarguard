@@ -6,6 +6,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -16,6 +22,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activity_Login"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".Activity_Registration"/>
+        <activity android:name=".CameraActivity.CameraActivity"/>
+        <activity android:name=".NoteVoiceOptional.NoteVoiceActivity"/>
         <activity android:name=".Activity_Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

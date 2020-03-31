@@ -15,11 +15,7 @@
 
     <string name="location_updated">Location Updated: %1$s</string>
 
-    <string-array name="genderArray">
-        <item>Men</item>
-        <item>Women</item>
-        <item>Other</item>
-    </string-array>
+
 
 
 </resources>

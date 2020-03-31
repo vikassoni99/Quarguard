@@ -130,15 +130,14 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
-            android:gravity="end"
+            android:gravity="start"
             >
             <Spinner
                 android:id="@+id/SpinnerGender"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="16dp">
+                android:layout_marginLeft="12dp">
 
             </Spinner>
 
@@ -146,17 +145,96 @@
                 android:id="@+id/textFieldAge"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:minWidth="120dp"
+                android:layout_height="68dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:hint="Age"
                 android:textColorHint="@color/colorAccent"
                 app:boxStrokeColor="@color/colorAccent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="62dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutDate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:minHeight="40dp"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+            app:layout_constraintTop_toBottomOf="@+id/LinearLayoutGenderAge"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            >
+
+            <TextView
+                android:id="@+id/textEnterDate"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Date of Admit"
+                android:textSize="20dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/textFieldDate"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:text="DD/MM/YY"
+                android:textSize="20dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutCurrentStatus"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:minHeight="40dp"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+            app:layout_constraintTop_toBottomOf="@+id/LinearLayoutDate"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            >
+
+            <TextView
+                android:id="@+id/textCurrentStatus"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Current Status"
+                android:textSize="20dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"/>
+
+            <Spinner
+                android:id="@+id/SpinnerStatus"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="12dp">
+
+            </Spinner>
+
+
 
         </LinearLayout>
 
@@ -174,7 +252,7 @@
             app:boxStrokeColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toBottomOf="@id/LinearLayoutGenderAge">
+            app:layout_constraintTop_toBottomOf="@id/LinearLayoutCurrentStatus">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -224,6 +302,50 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldBlock"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:hint="Block Area"
+            android:textColorHint="@color/colorAccent"
+            app:boxStrokeColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
+            app:layout_constraintTop_toBottomOf="@id/textFieldCity">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldAddress"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:hint="Address"
+            android:textColorHint="@color/colorAccent"
+            app:boxStrokeColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
+            app:layout_constraintTop_toBottomOf="@id/textFieldBlock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/Btn_CreateAcc"
             android:layout_width="match_parent"
@@ -238,7 +360,7 @@
             app:layout_constraintBottom_toTopOf="@id/LinearLayoutForLogin"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toBottomOf="@id/textFieldCity" />
+            app:layout_constraintTop_toBottomOf="@id/textFieldAddress" />
 
         <LinearLayout
             android:id="@+id/LinearLayoutForLogin"

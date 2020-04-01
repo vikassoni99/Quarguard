@@ -80,6 +80,20 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:id="@+id/TextBtn_ForgotPassword"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="Forgot Password ?"
+            android:textColor="@color/colorGrey"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textFieldPassword" />
+
 
 
         <Button
@@ -117,6 +131,7 @@
                 android:text="Don't have account ? "
                 android:textColor="@color/colorGrey"
                 android:textSize="16dp"/>
+
             <Button
                 android:id="@+id/TextBtn_createANewAcc"
                 android:layout_width="wrap_content"

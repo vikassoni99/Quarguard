@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/Card_Play"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/guidelineHAt2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -47,11 +47,13 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"
+                android:backgroundTint="#ffffff"
                 android:text="START RECORDING"
-                android:background="@drawable/btn_bg"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:textSize="12dp"
+                android:textStyle="bold"
                 android:padding="8dp"
-                android:textColor="#ffffff"
+                android:textColor="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/line_mid1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,11 +89,13 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/btn_bg"
-                android:text="Stop Recording"
+                android:backgroundTint="#ffffff"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:text="STOP RECORDING"
                 android:padding="8dp"
-                android:textColor="#ffffff"
+                android:textColor="@color/colorAccent"
                 android:textSize="12dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/line_mid1"
@@ -120,7 +124,7 @@
         app:cardCornerRadius="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH1"
+        app:layout_constraintBottom_toTopOf="@id/guidelineHAt7"
         app:layout_constraintTop_toBottomOf="@id/Card_Record">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -146,9 +150,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/btn_bg"
+                android:backgroundTint="#ffffff"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:text="PLAY VOICE"
-                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
                 android:textSize="12dp"
                 android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -186,9 +192,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/btn_bg"
+                android:backgroundTint="#ffffff"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:text="STOP VOICE"
-                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
                 android:textSize="12dp"
                 android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -231,12 +239,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
+
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH1"
+        android:id="@+id/guidelineHAt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHAt7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,6 @@ public interface RegisterAPI {
 
 
 
-
     @FormUrlEncoded
     @POST("/api/v1/login")
     public void loginUser(

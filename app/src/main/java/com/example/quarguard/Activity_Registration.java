@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.lang.reflect.Array;
@@ -26,12 +27,37 @@ public class Activity_Registration extends AppCompatActivity  {
 
     Button createBtn;
     Button loginBtn;
-    TextInputLayout ageT;
     TextView txtViewDate;
     Calendar cal;
     DatePickerDialog datePickerDialog;
     Spinner genderSpinner;
     Spinner statusSpinner;
+    TextInputEditText edtPatientname;
+    TextInputEditText edtFamilyname;
+    TextInputEditText edtMobileNumberSignup;
+    TextInputEditText edtAlternateNumber;
+    TextInputEditText edtAge;
+    TextInputEditText edtNationality;
+    TextInputEditText edtState;
+    TextInputEditText edtCity;
+    TextInputEditText edtBlock;
+    TextInputEditText edtAddress;
+    TextInputEditText edtPasswordSignup;
+    //all string values (14)
+    String strPatientName;
+    String strFamilyName;
+    String strMobileNumber;
+    String strAlternateNumber;
+    String strGender;
+    String strAge;
+    String strDate;
+    String strStatus;
+    String strNationality;
+    String strState;
+    String strCity;
+    String strBlock;
+    String strAddress;
+    String strPasswordSignup;
 
 
 
@@ -42,8 +68,24 @@ public class Activity_Registration extends AppCompatActivity  {
 
         createBtn=findViewById(R.id.Btn_CreateAcc);
         loginBtn=findViewById(R.id.TextBtn_login);
-        ageT = findViewById(R.id.textFieldAge);
         txtViewDate=findViewById(R.id.textFieldDate);
+
+        createBtn=findViewById(R.id.Btn_CreateAcc);
+        loginBtn=findViewById(R.id.TextBtn_login);
+        txtViewDate=findViewById(R.id.textFieldDate);
+
+        edtPatientname=findViewById(R.id.EdtPatientName);
+        edtFamilyname=findViewById(R.id.EdtFamilyName);
+        edtMobileNumberSignup=findViewById(R.id.EdtMobileNumberSignup);
+        edtAlternateNumber=findViewById(R.id.EdtAlternateNumber);
+        edtAge=findViewById(R.id.EdtAge);
+        edtNationality=findViewById(R.id.EdtNationality);
+        edtState=findViewById(R.id.EdtState);
+        edtCity=findViewById(R.id.EdtCity);
+        edtBlock=findViewById(R.id.EdtBlock);
+        edtAddress=findViewById(R.id.EdtAddress);
+        edtPasswordSignup=findViewById(R.id.EdtPasswordSignup);
+
         final List<String> genderList=new ArrayList();
         genderList.add("Men");
         genderList.add("Women");
@@ -53,6 +95,34 @@ public class Activity_Registration extends AppCompatActivity  {
         statusList.add("Recovered");
         statusList.add("Quarantine");
 
+
+        //Signup Button
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                strPatientName=edtPatientname.getText().toString();
+                strFamilyName=edtFamilyname.getText().toString();
+                strMobileNumber=edtMobileNumberSignup.getText().toString();
+                strAlternateNumber=edtAlternateNumber.getText().toString();
+                //strGender DONE
+                strAge=edtAge.getText().toString();
+                //strDate DONE
+                //strStatus DONE
+                strNationality=edtNationality.getText().toString();
+                strState=edtState.getText().toString();
+                strCity=edtCity.getText().toString();
+                strBlock=edtBlock.getText().toString();
+                strAddress=edtAddress.getText().toString();
+                strPasswordSignup=edtPasswordSignup.getText().toString();
+                //Toast.makeText(getApplicationContext(),strGender+"  "+strStatus+" "+strDate,Toast.LENGTH_SHORT).show();
+
+
+                Intent intent_registerToMain =new  Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent_registerToMain);
+            }
+        });
+
         //Spinner Gender
         genderSpinner=findViewById(R.id.SpinnerGender);
         ArrayAdapter<CharSequence> genderAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,genderList);
@@ -60,7 +130,7 @@ public class Activity_Registration extends AppCompatActivity  {
         genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String strGenderVal = parent.getItemAtPosition(position).toString();
+                strGender = parent.getItemAtPosition(position).toString();
                 //Toast.makeText(parent.getContext(),strGenderVal,Toast.LENGTH_SHORT).show();
             }
 
@@ -77,7 +147,7 @@ public class Activity_Registration extends AppCompatActivity  {
         statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String strStatusVal = parent.getItemAtPosition(position).toString();
+                strStatus = parent.getItemAtPosition(position).toString();
                 //Toast.makeText(parent.getContext(),strStatusVal,Toast.LENGTH_SHORT).show();
             }
 
@@ -99,8 +169,8 @@ public class Activity_Registration extends AppCompatActivity  {
                 datePickerDialog=new DatePickerDialog(Activity_Registration.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
-                        String s=mDay+" /"+(mMonth+1)+" /"+mYear;
-                        txtViewDate.setText(s);
+                        strDate=mYear+"-"+(mMonth+1)+"-"+mDay;
+                        txtViewDate.setText(strDate);
 
                     }
                 },day,month,year);
@@ -108,14 +178,8 @@ public class Activity_Registration extends AppCompatActivity  {
             }
         });
 
-        //Signup Button
-        createBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_registerToMain =new  Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent_registerToMain);
-            }
-        });
+
+
         //Login Button
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

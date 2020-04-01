@@ -10,6 +10,24 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:padding="8dp"
+        android:text="Logout"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/request_location_updates_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

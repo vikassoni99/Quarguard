@@ -163,6 +163,23 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                     registerUser();
                 }
                 else{
+                    PermissionListener permissionlistener = new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted() {
+                            Toast.makeText(Activity_Registration.this, "Location Allowed", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onPermissionDenied(List<String> deniedPermissions) {
+                            Toast.makeText(Activity_Registration.this, "Please on your location(GPS)", Toast.LENGTH_SHORT).show();
+                        }
+                    };
+                    TedPermission.with(Activity_Registration.this)
+                            .setPermissionListener(permissionlistener)
+                            .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                            .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION)
+                            .check();
+
                     Toast.makeText(Activity_Registration.this, "Please on your location", Toast.LENGTH_SHORT).show();
                 }
             }

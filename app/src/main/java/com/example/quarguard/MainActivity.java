@@ -157,12 +157,12 @@ public class MainActivity extends AppCompatActivity implements
                         PermissionListener permissionlistener = new PermissionListener() {
                             @Override
                             public void onPermissionGranted() {
-                                Toast.makeText(mService, "Location Allowed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Location Allowed", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onPermissionDenied(List<String> deniedPermissions) {
-                                Toast.makeText(mService, "Please on your location(GPS)", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Please on your location(GPS)", Toast.LENGTH_SHORT).show();
                             }
                         };
                         TedPermission.with(MainActivity.this)

@@ -95,7 +95,7 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
     GoogleApiClient mGoogleApiClient;
     private Location currentLocation;
     LocationRequest mLocationRequest;
-    String latitude,longitude,access;
+    String latitude ,longitude,access;
     private GoogleApiClient googleApiClient;
     private Location mLastLocation;
 
@@ -158,8 +158,13 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                 strPasswordSignup=edtPasswordSignup.getText().toString();
                 //Toast.makeText(getApplicationContext(),strGender+"  "+strStatus+" "+strDate,Toast.LENGTH_SHORT).show();
                 Toast.makeText(Activity_Registration.this, latitude, Toast.LENGTH_SHORT).show();
-                registerUser();
-
+                if (latitude!=null && longitude!=null)
+                {
+                    registerUser();
+                }
+                else{
+                    Toast.makeText(Activity_Registration.this, "Please on your location", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

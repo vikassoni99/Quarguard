@@ -110,7 +110,7 @@ public class NoteVoiceActivity extends Activity {
                     cv.put("filename", mFileName);
                     cv.put("blob", fileByteArray);
                     String s = new String(fileByteArray);
-                    Toast.makeText(NoteVoiceActivity.this, s, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(NoteVoiceActivity.this, s, Toast.LENGTH_SHORT).show();
                     uploadVoiceNoteAPI(s,access);
                     //insert krna h API m 
 

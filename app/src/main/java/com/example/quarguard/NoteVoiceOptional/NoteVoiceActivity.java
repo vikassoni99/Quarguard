@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -18,24 +19,35 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.quarguard.CameraActivity.CameraActivity;
 import com.example.quarguard.MainActivity;
 import com.example.quarguard.R;
+import com.example.quarguard.RetrofitAPI.RegisterAPI;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class NoteVoiceActivity extends Activity {
+    private static final String ROOT_URL ="" ;
     private Button startbtn, stopbtn, playbtn, stopplay, uploadNote;
     private MediaRecorder mRecorder;
     private MediaPlayer mPlayer;
     private static final String LOG_TAG = "AudioRecording";
     private static String mFileName = null;
     public static final int REQUEST_AUDIO_PERMISSION_CODE = 1;
+    String access;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +64,8 @@ public class NoteVoiceActivity extends Activity {
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
         mFileName += "/AudioRecording.3gp";
 
+        SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
+        access = prefs.getString("token", "");//"No name defined" is the default value.
         uploadNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +111,7 @@ public class NoteVoiceActivity extends Activity {
                     cv.put("blob", fileByteArray);
                     String s = new String(fileByteArray);
                     Toast.makeText(NoteVoiceActivity.this, s, Toast.LENGTH_SHORT).show();
+                    uploadVoiceNoteAPI(s,access);
                     //insert krna h API m 
 
                 }
@@ -177,6 +192,9 @@ public class NoteVoiceActivity extends Activity {
             }
         });
     }
+
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -200,5 +218,47 @@ public class NoteVoiceActivity extends Activity {
     }
     private void RequestPermissions() {
         ActivityCompat.requestPermissions(NoteVoiceActivity.this, new String[]{RECORD_AUDIO, WRITE_EXTERNAL_STORAGE}, REQUEST_AUDIO_PERMISSION_CODE);
+    }
+
+    private void uploadVoiceNoteAPI(String s,String access) {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(ROOT_URL) //Setting the Root URL
+                .build();
+
+        RegisterAPI api = adapter.create(RegisterAPI.class);
+
+        api.uploadPhoto(
+                s,
+                access,
+                new Callback<Response>() {
+                    @Override
+                    public void success(Response response, Response response2) {
+                        Toast.makeText(NoteVoiceActivity.this, "Uploaded successfully", Toast.LENGTH_SHORT).show();
+                        BufferedReader reader = null;
+
+                        //An string to store output from the server
+                        String output = "";
+
+                        try {
+                            //Initializing buffered reader
+                            reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
+
+                            //Reading the output in the string
+                            output = reader.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Displaying the output as a toast
+                        //Log.d("result",output);
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.d("errror",String.valueOf(error));
+                    }
+                }
+        );
     }
 }

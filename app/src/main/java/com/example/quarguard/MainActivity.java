@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements
     GoogleApiClient mGoogleApiClient;
     private Location currentLocation;
     LocationRequest mLocationRequest;
-    String latitude,longitude;
+    String latitude,longitude,access;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +102,9 @@ public class MainActivity extends AppCompatActivity implements
         btn_locateme = findViewById(R.id.btn_location_1_hr);
 
 
-
+        SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
+        access = prefs.getString("token", "");//"No name defined" is the default value.
+        Toast.makeText(MainActivity.this, access, Toast.LENGTH_SHORT).show();
 
         btn_panicMode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,38 +171,45 @@ public class MainActivity extends AppCompatActivity implements
 
         RegisterAPI api = adapter.create(RegisterAPI.class);
 
-        api.insertLocation(
-                "9530077351",
-                "SuperStrongPassword",
-                new Callback<Response>() {
-                    @Override
-                    public void success(Response response, Response response2) {
-                        BufferedReader reader = null;
+        if(access!=null){
+            api.insertLocation(
+                    latitude,
+                    longitude,
+                    access,
+                    new Callback<Response>() {
+                        @Override
+                        public void success(Response response, Response response2) {
+                            BufferedReader reader = null;
 
-                        //An string to store output from the server
-                        String output = "";
+                            //An string to store output from the server
+                            String output = "";
 
-                        try {
-                            //Initializing buffered reader
-                            reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
+                            try {
+                                //Initializing buffered reader
+                                reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
 
-                            //Reading the output in the string
-                            output = reader.readLine();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                                //Reading the output in the string
+                                output = reader.readLine();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            //Displaying the output as a toast
+                            Toast.makeText(MainActivity.this, output, Toast.LENGTH_LONG).show();
+                            Log.d("result",output);
                         }
 
-                        //Displaying the output as a toast
-                        Toast.makeText(MainActivity.this, output, Toast.LENGTH_LONG).show();
-                        Log.d("result",output);
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_SHORT).show();
+                        }
                     }
+            );
+        }
+        else{
+            Toast.makeText(MainActivity.this, "please login auth token error", Toast.LENGTH_SHORT).show();
+        }
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
     }
 
 

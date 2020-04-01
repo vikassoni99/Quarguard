@@ -42,8 +42,9 @@ public class Activity_Registration extends AppCompatActivity  {
     TextInputEditText edtCity;
     TextInputEditText edtBlock;
     TextInputEditText edtAddress;
+    TextInputEditText edtTravelHistory;
     TextInputEditText edtPasswordSignup;
-    //all string values (14)
+    //all string values (15)
     String strPatientName;
     String strFamilyName;
     String strMobileNumber;
@@ -57,6 +58,7 @@ public class Activity_Registration extends AppCompatActivity  {
     String strCity;
     String strBlock;
     String strAddress;
+    String strTravelHistory;
     String strPasswordSignup;
 
 
@@ -84,6 +86,7 @@ public class Activity_Registration extends AppCompatActivity  {
         edtCity=findViewById(R.id.EdtCity);
         edtBlock=findViewById(R.id.EdtBlock);
         edtAddress=findViewById(R.id.EdtAddress);
+        edtTravelHistory=findViewById(R.id.EdtTravelHistory);
         edtPasswordSignup=findViewById(R.id.EdtPasswordSignup);
 
         final List<String> genderList=new ArrayList();
@@ -114,6 +117,7 @@ public class Activity_Registration extends AppCompatActivity  {
                 strCity=edtCity.getText().toString();
                 strBlock=edtBlock.getText().toString();
                 strAddress=edtAddress.getText().toString();
+                strTravelHistory=edtTravelHistory.getText().toString();
                 strPasswordSignup=edtPasswordSignup.getText().toString();
                 //Toast.makeText(getApplicationContext(),strGender+"  "+strStatus+" "+strDate,Toast.LENGTH_SHORT).show();
 

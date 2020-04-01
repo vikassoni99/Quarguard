@@ -353,6 +353,28 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldTravelHistory"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:hint="Travel History (If Any)"
+            android:textColorHint="@color/colorAccent"
+            app:boxStrokeColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineV2"
+            app:layout_constraintStart_toStartOf="@id/guidelineV1"
+            app:layout_constraintTop_toBottomOf="@id/textFieldAddress">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/EdtTravelHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldPassword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -365,7 +387,7 @@
             app:boxStrokeColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toBottomOf="@id/textFieldAddress">
+            app:layout_constraintTop_toBottomOf="@id/textFieldTravelHistory">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtPasswordSignup"

@@ -49,7 +49,7 @@ public interface RegisterAPI {
 
 
     @FormUrlEncoded
-    @POST("")
+    @POST("/api/v1/upload/text")
     public void uploadText(
             @Field("text") String text,
             @Field("authorization") String authorization,

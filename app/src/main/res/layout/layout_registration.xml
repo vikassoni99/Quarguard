@@ -51,6 +51,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtPatientName"
+                android:inputType="textPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -74,6 +75,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtFamilyName"
                 android:layout_width="match_parent"
+                android:inputType="textPersonName"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +98,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtMobileNumberSignup"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="phone"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,7 +121,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtAlternateNumber"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="phone"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,7 +164,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/EdtAge"
                     android:layout_width="match_parent"
-                    android:layout_height="62dp" />
+                    android:layout_height="62dp"
+                    android:inputType="number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -259,6 +264,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtNationality"
+                android:inputType="textPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -281,6 +287,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtState"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -303,6 +310,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtCity"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -325,6 +333,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtBlock"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -347,6 +356,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtAddress"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -370,7 +380,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtTravelHistory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -392,6 +403,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtPasswordSignup"
                 android:layout_width="match_parent"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>

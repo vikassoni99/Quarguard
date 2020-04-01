@@ -148,7 +148,6 @@ public class NoteVoiceActivity extends Activity {
                 }
             }
         });
-
         stopbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

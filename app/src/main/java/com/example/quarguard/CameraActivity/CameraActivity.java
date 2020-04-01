@@ -18,6 +18,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.example.quarguard.MainActivity;
 import com.example.quarguard.NoteVoiceOptional.NoteVoiceActivity;
 import com.example.quarguard.R;
 import com.example.quarguard.RetrofitAPI.RegisterAPI;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -46,6 +48,8 @@ public class CameraActivity extends Activity
     final int MY_CAMERA_PERMISSION_CODE = 100;
     Bitmap photo;
     String access;
+    TextInputEditText edt_emergency;
+    private View btn_sendEmergencyMessage;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -55,10 +59,20 @@ public class CameraActivity extends Activity
         imageView = findViewById(R.id.img_imageview);
         voice_note = findViewById(R.id.btn_voiceNote);
         photoButton = findViewById(R.id.btn_capture);
-
+        btn_sendEmergencyMessage = findViewById(R.id.Btn_sendEmergencyMsg);
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
         access = prefs.getString("token", "");//"No name defined" is the default value.
-
+        edt_emergency = findViewById(R.id.edt_emergency_msg);
+        btn_sendEmergencyMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = edt_emergency.getText().toString();
+                if(text!=null)
+                uploadEmergencyText(text);
+                else
+                    Toast.makeText(CameraActivity.this,"please Type message",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         voice_note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +105,8 @@ public class CameraActivity extends Activity
 
         });
     }
+
+
 
 
     @Override
@@ -169,6 +185,32 @@ public class CameraActivity extends Activity
                     }
                 }
         );
+    }
+
+    private void uploadEmergencyText(String text) {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(ROOT_URL)
+                .build();
+
+        RegisterAPI api = adapter.create(RegisterAPI.class);
+
+        api.uploadEmergencyText(
+                text,
+                access,
+                new Callback<Response>() {
+                    @Override
+                    public void success(Response response, Response response2) {
+                        Toast.makeText(CameraActivity.this, "Text Uploaded", Toast.LENGTH_SHORT).show();
+                        edt_emergency.setText("Message sent success");
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(CameraActivity.this, "Error in uploading text please try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
     }
 
 

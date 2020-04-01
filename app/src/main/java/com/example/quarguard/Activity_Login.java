@@ -59,8 +59,7 @@ public class Activity_Login extends AppCompatActivity {
                 else{
                     Toast.makeText(Activity_Login.this, "Please Enter the details", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent_loginToMain =new  Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent_loginToMain);
+
             }
         });
     }
@@ -72,9 +71,8 @@ public class Activity_Login extends AppCompatActivity {
 
         RegisterAPI api = adapter.create(RegisterAPI.class);
 
-        api.loginUser(
-                "9530077351",
-                "SuperStrongPassword",
+        api.loginUser(phoneNumber,
+                password,
                 new Callback<Response>() {
                     @Override
                     public void success(Response response, Response response2) {
@@ -93,6 +91,8 @@ public class Activity_Login extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
+                        Intent intent_loginToMain =new  Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(intent_loginToMain);
                         //Displaying the output as a toast
                         //Log.d("result",output);
                         SharedPreferences.Editor editor = getSharedPreferences("tokenPre", MODE_PRIVATE).edit();

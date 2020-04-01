@@ -3,6 +3,7 @@ package com.example.quarguard;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -68,7 +69,8 @@ public class MainActivity extends AppCompatActivity implements
     // UI elements.
     Button mRequestLocationUpdatesButton;
     Button mRemoveLocationUpdatesButton;
-    Button btn_panicMode,btn_locateme;
+    Button btn_panicMode,btn_locateme,btn_logout;
+    CardView card_panic;
 
     // Monitors the state of the connection to the service.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -100,11 +102,23 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         btn_panicMode = findViewById(R.id.btn_panic_mode);
         btn_locateme = findViewById(R.id.btn_location_1_hr);
+        btn_logout = findViewById(R.id.btnLogout);
+
+
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences = getSharedPreferences("tokenPre", 0);
+                preferences.edit().remove("token").commit();
+                Intent intent = new Intent(MainActivity.this,Activity_Login.class);
+                startActivity(intent);
+            }
+        });
 
 
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
         access = prefs.getString("token", "");//"No name defined" is the default value.
-        Toast.makeText(MainActivity.this, access, Toast.LENGTH_SHORT).show();
+
 
         btn_panicMode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements
             );
         }
         else{
-            Toast.makeText(MainActivity.this, "please login auth token error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "not registerd", Toast.LENGTH_SHORT).show();
         }
 
     }

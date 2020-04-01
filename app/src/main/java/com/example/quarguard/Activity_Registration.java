@@ -1,8 +1,13 @@
 package com.example.quarguard;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,19 +17,43 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import com.example.quarguard.CameraActivity.CameraActivity;
+import com.example.quarguard.RetrofitAPI.RegisterAPI;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Activity_Registration extends AppCompatActivity  {
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
+public class Activity_Registration extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener ,LocationListener{
+
+    private static final String ROOT_URL = "https://quarguard.herokuapp.com";
     Button createBtn;
     Button loginBtn;
     TextView txtViewDate;
@@ -45,22 +74,30 @@ public class Activity_Registration extends AppCompatActivity  {
     TextInputEditText edtTravelHistory;
     TextInputEditText edtPasswordSignup;
     //all string values (15)
-    String strPatientName;
-    String strFamilyName;
-    String strMobileNumber;
-    String strAlternateNumber;
-    String strGender;
-    String strAge;
-    String strDate;
-    String strStatus;
-    String strNationality;
-    String strState;
-    String strCity;
-    String strBlock;
-    String strAddress;
-    String strTravelHistory;
-    String strPasswordSignup;
+    String strPatientName = "";
+    String strFamilyName= "";
+    String strMobileNumber= "";
+    String strAlternateNumber= "";
+    String strGender= "";
+    String strAge= "";
+    String strDate= "";
+    String strStatus= "";
+    String strNationality= "";
+    String strState= "";
+    String strCity= "";
+    String strBlock= "";
+    String strAddress= "";
+    String strTravelHistory= "";
+    String strPasswordSignup= "";
 
+    //Location Variables
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    GoogleApiClient mGoogleApiClient;
+    private Location currentLocation;
+    LocationRequest mLocationRequest;
+    String latitude,longitude,access;
+    private GoogleApiClient googleApiClient;
+    private Location mLastLocation;
 
 
     @Override
@@ -120,12 +157,13 @@ public class Activity_Registration extends AppCompatActivity  {
                 strTravelHistory=edtTravelHistory.getText().toString();
                 strPasswordSignup=edtPasswordSignup.getText().toString();
                 //Toast.makeText(getApplicationContext(),strGender+"  "+strStatus+" "+strDate,Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_Registration.this, latitude, Toast.LENGTH_SHORT).show();
+                registerUser();
 
-
-                Intent intent_registerToMain =new  Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent_registerToMain);
             }
         });
+
+        buildGoogleApiClient();
 
         //Spinner Gender
         genderSpinner=findViewById(R.id.SpinnerGender);
@@ -192,11 +230,162 @@ public class Activity_Registration extends AppCompatActivity  {
                 startActivity(intent_registerToLogin);
             }
         });
+        buildGoogleApiClient();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        } else
+            Toast.makeText(this, "Not Connected!", Toast.LENGTH_SHORT).show();
 
 
 
 
     }
 
+    private void registerUser() {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(ROOT_URL) //Setting the Root URL
+                .build();
 
+        RegisterAPI api = adapter.create(RegisterAPI.class);
+
+        api.registerUser(
+                    strPatientName,
+                    strFamilyName,
+                    strMobileNumber,
+                    strAlternateNumber,
+                    strAge,
+                    strGender,
+                    "2020-04-02T12:10:00.000Z",
+                    strStatus,
+                    strCity,
+                    strBlock,
+                    strState,
+                    strNationality,
+                    strAddress,
+                    latitude,
+                    longitude,
+                    strTravelHistory,
+                    strPasswordSignup,
+                new Callback<Response>() {
+                    @Override
+                    public void success(Response response, Response response2) {
+                        Toast.makeText(Activity_Registration.this, "Uploaded successfully", Toast.LENGTH_SHORT).show();
+                        BufferedReader reader = null;
+                        Intent intent_registerToMain =new  Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(intent_registerToMain);
+                        //An string to store output from the server
+                        String output = "";
+
+                        try {
+                            //Initializing buffered reader
+                            reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
+
+                            //Reading the output in the string
+                            output = reader.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Displaying the output as a toast
+                        //Log.d("result",output);
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.d("errror",String.valueOf(error));
+                    }
+                }
+        );
+    }
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        } else {
+            /*Getting the location after aquiring location service*/
+            mLocationRequest = new LocationRequest();
+            mLocationRequest.setInterval(10000);    // 10 seconds, in milliseconds
+            mLocationRequest.setFastestInterval(1000);   // 1 second, in milliseconds
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                    mGoogleApiClient);
+
+            if (mLastLocation != null) {
+
+               latitude =  String.valueOf(mLastLocation.getLatitude());
+               longitude =  String.valueOf(mLastLocation.getLongitude());
+                Toast.makeText(Activity_Registration.this, latitude, Toast.LENGTH_SHORT).show();
+            } else {
+                /*if there is no last known location. Which means the device has no data for the loction currently.
+                 * So we will get the current location.
+                 * For this we'll implement Location Listener and override onLocationChanged*/
+                Log.i("Current Location", "No data for location found");
+
+                if (!mGoogleApiClient.isConnected())
+                    mGoogleApiClient.connect();
+
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, Activity_Registration.this);
+            }
+        }
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(Activity_Registration.this, new
+                String[]{ACCESS_FINE_LOCATION}, 100);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onStop();
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        return;
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
 }

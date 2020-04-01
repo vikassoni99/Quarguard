@@ -49,9 +49,32 @@ public interface RegisterAPI {
 
     @FormUrlEncoded
     @POST("/api/v1/upload/text")
-    public void uploadText(
+    public void uploadEmergencyText(
             @Field("text") String text,
             @Field("authorization") String authorization,
+            Callback<Response> callback
+    );
+
+    @FormUrlEncoded
+    @POST("/api/v1/register")
+    void registerUser(
+            @Field("name1") String name1,
+            @Field("name2") String name2,
+            @Field("phoneNumber1") String phoneNumber1,
+            @Field("phoneNumber2") String phoneNumber2,
+            @Field("age") String age,
+            @Field("gender") String gender,
+            @Field("dateAnnounced") String dateAnnounced,
+            @Field("currentStatus") String currentStatus,
+            @Field("detectedCity") String detectedCity,
+            @Field("block") String block,
+            @Field("detectedState") String detectedState,
+            @Field("nationality") String nationality,
+            @Field("address") String address,
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("travel") String travel,
+            @Field("password") String password,
             Callback<Response> callback
     );
 

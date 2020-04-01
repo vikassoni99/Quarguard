@@ -3,6 +3,7 @@ package com.example.quarguard;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -311,6 +312,9 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
 
                             //Reading the output in the string
                             output = reader.readLine();
+                            SharedPreferences.Editor editor = getSharedPreferences("tokenPre", MODE_PRIVATE).edit();
+                            editor.putString("token", output);
+                            editor.apply();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

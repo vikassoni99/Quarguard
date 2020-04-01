@@ -16,9 +16,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -29,17 +27,26 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.quarguard.CameraActivity.CameraActivity;
+import com.example.quarguard.RetrofitAPI.RegisterAPI;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.material.snackbar.Snackbar;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -47,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements
 
     // Used in checking for runtime permissions.
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
+    private static final String ROOT_URL = "https://quarguard.herokuapp.com";
 
     // The BroadcastReceiver used to listen from broadcasts from the service.
     private MyReceiver myReceiver;
@@ -83,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements
     GoogleApiClient mGoogleApiClient;
     private Location currentLocation;
     LocationRequest mLocationRequest;
-    String lat,lon;
+    String latitude,longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,8 +133,9 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
 
-                    if(lat!=null && lon !=null){
-                        Toast.makeText(MainActivity.this,"latitude : "+lat+" "+"Longitude : "+lon, Toast.LENGTH_SHORT).show();
+                    if(latitude !=null && longitude !=null){
+                        insertLocation();
+                        Toast.makeText(MainActivity.this,"latitude : "+ latitude +" "+"Longitude : "+longitude, Toast.LENGTH_SHORT).show();
                     }
                     else{
                         PermissionListener permissionlistener = new PermissionListener() {
@@ -153,6 +162,46 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
+    private void insertLocation() {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(ROOT_URL) //Setting the Root URL
+                .build();
+
+        RegisterAPI api = adapter.create(RegisterAPI.class);
+
+        api.insertLocation(
+                "9530077351",
+                "SuperStrongPassword",
+                new Callback<Response>() {
+                    @Override
+                    public void success(Response response, Response response2) {
+                        BufferedReader reader = null;
+
+                        //An string to store output from the server
+                        String output = "";
+
+                        try {
+                            //Initializing buffered reader
+                            reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
+
+                            //Reading the output in the string
+                            output = reader.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Displaying the output as a toast
+                        Toast.makeText(MainActivity.this, output, Toast.LENGTH_LONG).show();
+                        Log.d("result",output);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
 
 
     protected synchronized void buildGoogleApiClient() {
@@ -338,8 +387,8 @@ public class MainActivity extends AppCompatActivity implements
                 mGoogleApiClient);
         if (mLastLocation != null) {
             currentLocation = mLastLocation;
-            lat = String.valueOf(currentLocation.getLatitude());
-            lon = String.valueOf(currentLocation.getLongitude());
+            latitude = String.valueOf(currentLocation.getLatitude());
+            longitude = String.valueOf(currentLocation.getLongitude());
         }
 
         LocationRequest mLocationRequest = new LocationRequest();
@@ -364,8 +413,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onLocationChanged(Location location) {
-        lat = String.valueOf(location.getLatitude());
-        lon = String.valueOf(location.getLongitude());
+        latitude = String.valueOf(location.getLatitude());
+        longitude = String.valueOf(location.getLongitude());
     }
 
     /**

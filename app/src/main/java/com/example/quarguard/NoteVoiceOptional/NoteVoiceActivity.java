@@ -40,7 +40,7 @@ import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class NoteVoiceActivity extends Activity {
-    private static final String ROOT_URL ="" ;
+    private static final String ROOT_URL ="https://quarguard.herokuapp.com" ;
     private Button startbtn, stopbtn, playbtn, stopplay, uploadNote;
     private MediaRecorder mRecorder;
     private MediaPlayer mPlayer;
@@ -148,6 +148,7 @@ public class NoteVoiceActivity extends Activity {
                 }
             }
         });
+
         stopbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +162,7 @@ public class NoteVoiceActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
             }
         });
+
         playbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,7 +229,7 @@ public class NoteVoiceActivity extends Activity {
 
         RegisterAPI api = adapter.create(RegisterAPI.class);
 
-        api.uploadPhoto(
+        api.uploadVoice(
                 s,
                 access,
                 new Callback<Response>() {

@@ -75,6 +75,9 @@ public interface RegisterAPI {
             @Field("longitude") String longitude,
             @Field("travel") String travel,
             @Field("password") String password,
+            @Field("cough") String cough,
+            @Field("fever") String fever,
+            @Field("breathing") String breathing,
             Callback<Response> callback
     );
 

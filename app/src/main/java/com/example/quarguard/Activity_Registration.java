@@ -113,6 +113,8 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
     String strHeadache= "";
 
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +123,8 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
         createBtn = findViewById(R.id.Btn_CreateAcc);
         loginBtn = findViewById(R.id.TextBtn_login);
         txtViewDate = findViewById(R.id.textFieldDate);
+
+
 
         createBtn = findViewById(R.id.Btn_CreateAcc);
         loginBtn = findViewById(R.id.TextBtn_login);
@@ -227,7 +231,7 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                     case R.id.FeverYes:
                         strFever = "1";
                         break;
-                    case R.id.CoughNo:
+                    case R.id.FeverNo:
                         strFever= "0";
                         break;
                 }
@@ -361,6 +365,9 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                     longitude,
                     strTravelHistory,
                     strPasswordSignup,
+                    strCough,
+                    strFever,
+                    strHeadache,
                 new Callback<Response>() {
                     @Override
                     public void success(Response response, Response response2) {

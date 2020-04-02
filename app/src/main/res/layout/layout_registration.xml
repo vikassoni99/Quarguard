@@ -247,6 +247,172 @@
         </LinearLayout>
 
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Card_Symptompts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="30dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="36dp"
+            android:elevation="0dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/LinearLayoutCurrentStatus">
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/TextCough"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Having Cough ?"
+                    android:layout_marginTop="4dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/line_midRadio"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/TextFever"/>
+
+                <TextView
+                    android:id="@+id/TextFever"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Having Fever ?"
+                    android:layout_marginTop="4dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/line_midRadio"
+                    app:layout_constraintTop_toBottomOf="@id/TextCough"
+                    app:layout_constraintBottom_toTopOf="@id/TextHeadache"
+                    />
+
+                <TextView
+                    android:id="@+id/TextHeadache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Having Headache ?"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/line_midRadio"
+                    app:layout_constraintTop_toBottomOf="@id/TextFever"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <View
+                    android:id="@+id/line_midRadio"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/card_line_bg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <RadioGroup
+                    android:id="@+id/radioGrpCough"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toEndOf="@id/line_midRadio"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/radioGrpFever">
+
+                    <RadioButton
+                        android:id="@+id/CoughYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textSize="20dp" />
+
+                    <RadioButton
+                        android:id="@+id/CoughNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:textSize="20dp"/>
+
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/radioGrpFever"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toEndOf="@id/line_midRadio"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGrpCough"
+                    app:layout_constraintBottom_toTopOf="@+id/radioGrpHeadache">
+
+                    <RadioButton
+                        android:id="@+id/FeverYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textSize="20dp" />
+
+                    <RadioButton
+                        android:id="@+id/FeverNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:textSize="20dp"/>
+
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/radioGrpHeadache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintStart_toEndOf="@id/line_midRadio"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGrpFever"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/HeadacheYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textSize="20dp" />
+
+                    <RadioButton
+                        android:id="@+id/HeadacheNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:textSize="20dp"/>
+
+
+                </RadioGroup>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldNationality"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -260,7 +426,7 @@
             app:boxStrokeColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="@id/guidelineV2"
             app:layout_constraintStart_toStartOf="@id/guidelineV1"
-            app:layout_constraintTop_toBottomOf="@id/LinearLayoutCurrentStatus">
+            app:layout_constraintTop_toBottomOf="@id/Card_Symptompts">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EdtNationality"

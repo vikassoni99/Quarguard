@@ -14,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -100,41 +102,57 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
     private GoogleApiClient googleApiClient;
     private Location mLastLocation;
 
+    //RadioGroup
+    RadioGroup GrpCough;
+    RadioGroup GrpFever;
+    RadioGroup GrpHeadache;
+    RadioButton RBCough;
+
+    String strCough= "";
+    String strFever= "";
+    String strHeadache= "";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_registration);
 
-        createBtn=findViewById(R.id.Btn_CreateAcc);
-        loginBtn=findViewById(R.id.TextBtn_login);
-        txtViewDate=findViewById(R.id.textFieldDate);
+        createBtn = findViewById(R.id.Btn_CreateAcc);
+        loginBtn = findViewById(R.id.TextBtn_login);
+        txtViewDate = findViewById(R.id.textFieldDate);
 
-        createBtn=findViewById(R.id.Btn_CreateAcc);
-        loginBtn=findViewById(R.id.TextBtn_login);
-        txtViewDate=findViewById(R.id.textFieldDate);
+        createBtn = findViewById(R.id.Btn_CreateAcc);
+        loginBtn = findViewById(R.id.TextBtn_login);
+        txtViewDate = findViewById(R.id.textFieldDate);
 
-        edtPatientname=findViewById(R.id.EdtPatientName);
-        edtFamilyname=findViewById(R.id.EdtFamilyName);
-        edtMobileNumberSignup=findViewById(R.id.EdtMobileNumberSignup);
-        edtAlternateNumber=findViewById(R.id.EdtAlternateNumber);
-        edtAge=findViewById(R.id.EdtAge);
-        edtNationality=findViewById(R.id.EdtNationality);
-        edtState=findViewById(R.id.EdtState);
-        edtCity=findViewById(R.id.EdtCity);
-        edtBlock=findViewById(R.id.EdtBlock);
-        edtAddress=findViewById(R.id.EdtAddress);
-        edtTravelHistory=findViewById(R.id.EdtTravelHistory);
-        edtPasswordSignup=findViewById(R.id.EdtPasswordSignup);
+        edtPatientname = findViewById(R.id.EdtPatientName);
+        edtFamilyname = findViewById(R.id.EdtFamilyName);
+        edtMobileNumberSignup = findViewById(R.id.EdtMobileNumberSignup);
+        edtAlternateNumber = findViewById(R.id.EdtAlternateNumber);
+        edtAge = findViewById(R.id.EdtAge);
+        edtNationality = findViewById(R.id.EdtNationality);
+        edtState = findViewById(R.id.EdtState);
+        edtCity = findViewById(R.id.EdtCity);
+        edtBlock = findViewById(R.id.EdtBlock);
+        edtAddress = findViewById(R.id.EdtAddress);
+        edtTravelHistory = findViewById(R.id.EdtTravelHistory);
+        edtPasswordSignup = findViewById(R.id.EdtPasswordSignup);
 
-        final List<String> genderList=new ArrayList();
+        final List<String> genderList = new ArrayList();
         genderList.add("Men");
         genderList.add("Women");
         genderList.add("Other");
 
-        final List<String> statusList=new ArrayList();
+        final List<String> statusList = new ArrayList();
         statusList.add("Recovered");
         statusList.add("Quarantine");
+
+
+        GrpCough = findViewById(R.id.radioGrpCough);
+        GrpFever = findViewById(R.id.radioGrpFever);
+        GrpHeadache = findViewById(R.id.radioGrpHeadache);
+        RBCough=findViewById(R.id.CoughYes);
 
 
         //Signup Button
@@ -142,28 +160,27 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
             @Override
             public void onClick(View v) {
 
-                strPatientName=edtPatientname.getText().toString();
-                strFamilyName=edtFamilyname.getText().toString();
-                strMobileNumber=edtMobileNumberSignup.getText().toString();
-                strAlternateNumber=edtAlternateNumber.getText().toString();
+
+                strPatientName = edtPatientname.getText().toString();
+                strFamilyName = edtFamilyname.getText().toString();
+                strMobileNumber = edtMobileNumberSignup.getText().toString();
+                strAlternateNumber = edtAlternateNumber.getText().toString();
                 //strGender DONE
-                strAge=edtAge.getText().toString();
+                strAge = edtAge.getText().toString();
                 //strDate DONE
                 //strStatus DONE
-                strNationality=edtNationality.getText().toString();
-                strState=edtState.getText().toString();
-                strCity=edtCity.getText().toString();
-                strBlock=edtBlock.getText().toString();
-                strAddress=edtAddress.getText().toString();
-                strTravelHistory=edtTravelHistory.getText().toString();
-                strPasswordSignup=edtPasswordSignup.getText().toString();
+                strNationality = edtNationality.getText().toString();
+                strState = edtState.getText().toString();
+                strCity = edtCity.getText().toString();
+                strBlock = edtBlock.getText().toString();
+                strAddress = edtAddress.getText().toString();
+                strTravelHistory = edtTravelHistory.getText().toString();
+                strPasswordSignup = edtPasswordSignup.getText().toString();
                 //Toast.makeText(getApplicationContext(),strGender+"  "+strStatus+" "+strDate,Toast.LENGTH_SHORT).show();
                 Toast.makeText(Activity_Registration.this, latitude, Toast.LENGTH_SHORT).show();
-                if (latitude!=null && longitude!=null)
-                {
+                if (latitude != null && longitude != null) {
                     registerUser();
-                }
-                else{
+                } else {
                     PermissionListener permissionlistener = new PermissionListener() {
                         @Override
                         public void onPermissionGranted() {
@@ -187,6 +204,54 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
         });
 
         buildGoogleApiClient();
+
+        //Radio Group
+        GrpCough.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.CoughYes:
+                        strCough = "1";
+                        break;
+                    case R.id.CoughNo:
+                        strCough = "0";
+                        break;
+                }
+            }
+        });
+
+        GrpFever.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.FeverYes:
+                        strFever = "1";
+                        break;
+                    case R.id.CoughNo:
+                        strFever= "0";
+                        break;
+                }
+            }
+        });
+
+        GrpHeadache.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.HeadacheYes:
+                        strHeadache = "1";
+                        break;
+                    case R.id.HeadacheNo:
+                        strHeadache = "0";
+                        break;
+                }
+            }
+        });
+
+
+
+
+
 
         //Spinner Gender
         genderSpinner=findViewById(R.id.SpinnerGender);

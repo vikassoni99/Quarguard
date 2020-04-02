@@ -72,7 +72,7 @@ public class NoteVoiceActivity extends Activity {
                 //vikas idher upload krna h
 
                 if(mFileName != null){
-                    Toast.makeText(NoteVoiceActivity.this, "Audio file ka naam "+ " " +mFileName, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(NoteVoiceActivity.this, "Audio file ka naam "+ " " +mFileName, Toast.LENGTH_SHORT).show();
                     mRecorder = new MediaRecorder();
                     mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                     mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);

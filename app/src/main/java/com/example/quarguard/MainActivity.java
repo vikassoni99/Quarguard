@@ -110,10 +110,12 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 SharedPreferences preferences = getSharedPreferences("tokenPre", 0);
                 preferences.edit().remove("token").commit();
+                Log.d("token",access);
                 Intent intent = new Intent(MainActivity.this,Activity_Login.class);
                 startActivity(intent);
             }
         });
+
 
 
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
@@ -473,4 +475,13 @@ public class MainActivity extends AppCompatActivity implements
             mRemoveLocationUpdatesButton.setEnabled(false);
         }
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+    }
+
 }

@@ -106,7 +106,7 @@
         app:cardCornerRadius="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/Card_Play"
+        app:layout_constraintBottom_toTopOf="@id/Card_Panic"
         app:layout_constraintTop_toTopOf="@+id/guidelineHAt2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -197,7 +197,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/Card_Play"
+        android:id="@+id/Card_Panic"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="36dp"
@@ -215,7 +215,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iconPlay"
+                android:id="@+id/iconPanic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

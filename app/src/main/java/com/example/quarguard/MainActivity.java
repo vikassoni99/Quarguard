@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements
         btn_panicMode = findViewById(R.id.btn_panic_mode);
         btn_locateme = findViewById(R.id.btn_location_1_hr);
         btn_logout = findViewById(R.id.btnLogout);
+        card_panic=findViewById(R.id.Card_Panic);
 
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +130,16 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(intent);
             }
         });
+
+        card_panic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         // Check that the user hasn't revoked permissions by going to Settings.
         if (Utils.requestingLocationUpdates(this)) {
             if (!checkPermissions()) {

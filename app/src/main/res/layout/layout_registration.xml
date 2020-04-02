@@ -298,7 +298,7 @@
                     android:id="@+id/TextHeadache"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Having Breathing Issue ?"
+                    android:text="Breathing Problem ?"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
                     android:textSize="16dp"
@@ -338,14 +338,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Yes"
-                        android:textSize="20dp" />
+                        android:textColor="@color/colorGrey"
+                        android:textSize="16dp" />
 
                     <RadioButton
                         android:id="@+id/CoughNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No"
-                        android:textSize="20dp"/>
+                        android:textColor="@color/colorGrey"
+                        android:textSize="16dp"/>
 
 
                 </RadioGroup>
@@ -366,14 +368,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Yes"
-                        android:textSize="20dp" />
+                        android:textColor="@color/colorGrey"
+                        android:textSize="16dp" />
 
                     <RadioButton
                         android:id="@+id/FeverNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No"
-                        android:textSize="20dp"/>
+                        android:textColor="@color/colorGrey"
+                        android:textSize="16dp"/>
 
 
                 </RadioGroup>
@@ -395,14 +399,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Yes"
-                        android:textSize="20dp" />
+                        android:textColor="@color/colorGrey"
+                        android:textSize="16dp" />
 
                     <RadioButton
                         android:id="@+id/HeadacheNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No"
-                        android:textSize="20dp"/>
+                        android:textColor="@color/colorGrey"
+                        android:textSize="16dp"/>
 
 
                 </RadioGroup>

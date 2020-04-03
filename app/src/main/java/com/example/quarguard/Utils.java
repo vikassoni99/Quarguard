@@ -37,8 +37,24 @@ class Utils {
      * @param location  The {@link Location}.
      */
     static String getLocationText(Location location) {
-        return location == null ? "Unknown location" :
-                "(" + location.getLatitude() + ", " + location.getLongitude() + ")";
+        if (location == null)
+            return "no loaction";
+        else
+            return String.valueOf(location.getLatitude()) + " " + String.valueOf(location.getLongitude());
+    }
+
+    static String getLatitude(Location location){
+        if(location == null)
+            return "";
+        else
+            return String.valueOf(location.getLatitude());
+    }
+
+    static String getLongitude(Location location){
+        if(location == null)
+            return "";
+        else
+            return String.valueOf(location.getLongitude());
     }
 
     static String getLocationTitle(Context context) {

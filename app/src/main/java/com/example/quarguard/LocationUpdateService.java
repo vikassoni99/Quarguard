@@ -17,6 +17,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -144,6 +145,10 @@ public class LocationUpdateService extends Service {
             removeLocationUpdates();
             stopSelf();
         }
+        Utils.setRequestingLocationUpdates(this, true);
+
+        String loc = Utils.getLocationText(mLocation);
+        Toast.makeText(this, loc, Toast.LENGTH_SHORT).show();
         // Tells the system to not try to recreate the service after it has been killed.
         return START_STICKY;
     }

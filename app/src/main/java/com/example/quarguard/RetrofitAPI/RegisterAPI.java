@@ -55,6 +55,17 @@ public interface RegisterAPI {
             Callback<Response> callback
     );
 
+
+    @FormUrlEncoded
+    @POST("/api/v1/outofarea")
+    public void uploadLocationContinues(
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("authorization") String authorization,
+            Callback<Response> callback
+    );
+
+
     @FormUrlEncoded
     @POST("/api/v1/register")
     void registerUser(

@@ -462,9 +462,55 @@ public class MainActivity extends AppCompatActivity implements
             Location location = intent.getParcelableExtra(LocationUpdateService.EXTRA_LOCATION);
             if (location != null) {
                 context.startService(new Intent(context ,LocationUpdateService.class));
-                Toast.makeText(MainActivity.this, Utils.getLocationText(location),
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, Utils.getLocationText(location), Toast.LENGTH_SHORT).show();
+                String latitude = Utils.getLatitude(location);
+                String longitude = Utils.getLongitude(location);
+                updateLocation(latitude,longitude);
             }
+        }
+    }
+
+    private void updateLocation(String latitude, String longitude) {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(ROOT_URL) //Setting the Root URL
+                .build();
+
+        RegisterAPI api = adapter.create(RegisterAPI.class);
+
+        if (access != null) {
+            api.uploadLocationContinues(
+                    latitude,
+                    longitude,
+                    access,
+                    new Callback<Response>() {
+                        @Override
+                        public void success(Response response, Response response2) {
+                            BufferedReader reader = null;
+
+                            //An string to store output from the server
+                            String output = "";
+
+                            try {
+                                //Initializing buffered reader
+                                reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
+
+                                //Reading the output in the string
+                                output = reader.readLine();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            //Displaying the output as a toast
+                            Toast.makeText(MainActivity.this, output, Toast.LENGTH_LONG).show();
+                            Log.d("result", output);
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
         }
     }
 

@@ -587,7 +587,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/btn_bg"
             android:text="CREATE ACCOUNT"
             android:textColor="#ffffff"
             android:textSize="16dp"

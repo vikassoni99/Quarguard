@@ -98,6 +98,7 @@ public class LocationUpdateService extends Service {
      * The current location.
      */
     private Location mLocation;
+    MainActivity main;
 
     public LocationUpdateService() {
     }
@@ -137,6 +138,7 @@ public class LocationUpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "Service started");
+        main = new MainActivity();
         boolean startedFromNotification = intent.getBooleanExtra(EXTRA_STARTED_FROM_NOTIFICATION,
                 false);
 
@@ -249,7 +251,8 @@ public class LocationUpdateService extends Service {
         Intent intent = new Intent(this, LocationUpdateService.class);
 
         CharSequence text = Utils.getLocationText(mLocation);
-
+        String s = main.status();
+        Log.d("status",s);
         // Extra to help us figure out if we arrived in onStartCommand via the notification or not.
         intent.putExtra(EXTRA_STARTED_FROM_NOTIFICATION, true);
 
@@ -261,6 +264,8 @@ public class LocationUpdateService extends Service {
         PendingIntent activityPendingIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, MainActivity.class), 0);
 
+        if(s == "1"){text = "please stay inside home";}
+        else{text = "you are under quarantine";}
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .addAction(R.drawable.ic_launcher_foreground, "launch",
                         activityPendingIntent)

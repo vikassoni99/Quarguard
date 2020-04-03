@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements
     Button mRemoveLocationUpdatesButton;
     Button btn_panicMode,btn_locateme,btn_logout;
     CardView card_panic;
+    static String check="000";
+
 
     // Monitors the state of the connection to the service.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -162,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
 
+
                     if(latitude !=null && longitude !=null){
                         insertLocation();
                         Toast.makeText(MainActivity.this,"latitude : "+ latitude +" "+"Longitude : "+longitude, Toast.LENGTH_SHORT).show();
@@ -224,10 +227,12 @@ public class MainActivity extends AppCompatActivity implements
                             //Displaying the output as a toast
                             Toast.makeText(MainActivity.this, output, Toast.LENGTH_LONG).show();
                             Log.d("result",output);
+                            check = "999";
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
+                            check = "1";
                             Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -252,8 +257,8 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onStart() {
         super.onStart();
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .registerOnSharedPreferenceChangeListener(this);
+//        PreferenceManager.getDefaultSharedPreferences(this)
+//                .registerOnSharedPreferenceChangeListener(this);
 
         mRequestLocationUpdatesButton = (Button) findViewById(R.id.request_location_updates_button);
         mRemoveLocationUpdatesButton = (Button) findViewById(R.id.remove_location_updates_button);
@@ -278,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
         // Restore the state of the buttons when the activity (re)launches.
-        setButtonsState(Utils.requestingLocationUpdates(this));
+        //setButtonsState(Utils.requestingLocationUpdates(this));
 
         // Bind to the service. If the service is in foreground mode, this signals to the service
         // that since this activity is in the foreground, the service can exit foreground mode.
@@ -456,7 +461,7 @@ public class MainActivity extends AppCompatActivity implements
     /**
      * Receiver for broadcasts sent by {@link LocationUpdateService}.
      */
-    private class MyReceiver extends BroadcastReceiver {
+    public class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             Location location = intent.getParcelableExtra(LocationUpdateService.EXTRA_LOCATION);
@@ -470,7 +475,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private void updateLocation(String latitude, String longitude) {
+    public void updateLocation(String latitude, String longitude) {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ROOT_URL) //Setting the Root URL
                 .build();
@@ -501,17 +506,23 @@ public class MainActivity extends AppCompatActivity implements
                             }
 
                             //Displaying the output as a toast
-                            Toast.makeText(MainActivity.this, output, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(MainActivity.this, output, Toast.LENGTH_LONG).show();
                             Log.d("result", output);
+                            check = "0";
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
+                            check = "1";
                             Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_SHORT).show();
                         }
                     }
             );
         }
+    }
+
+    String status(){
+        return check;
     }
 
     @Override

@@ -51,11 +51,15 @@ public class CameraActivity extends Activity
     TextInputEditText edt_emergency;
     private View btn_sendEmergencyMessage;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
+
         imageView = findViewById(R.id.img_imageview);
         voice_note = findViewById(R.id.btn_voiceNote);
         photoButton = findViewById(R.id.btn_capture);
@@ -73,6 +77,8 @@ public class CameraActivity extends Activity
                     Toast.makeText(CameraActivity.this,"please Type message",Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         voice_note.setOnClickListener(new View.OnClickListener() {
             @Override

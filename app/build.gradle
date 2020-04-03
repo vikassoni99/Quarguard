@@ -45,4 +45,6 @@ dependencies {
     implementation 'gun0912.ted:tedpermission:2.2.3'
 
     implementation 'com.squareup.retrofit:retrofit:1.9.0'
+
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
 }

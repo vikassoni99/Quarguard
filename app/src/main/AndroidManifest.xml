@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.quarguard">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.STORAGE" />
 
@@ -20,29 +20,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity_Login"
-            android:noHistory="true"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".Activity_Registration"/>
-        <activity android:name=".CameraActivity.CameraActivity"/>
-        <activity android:name=".NoteVoiceOptional.NoteVoiceActivity"/>
-        <activity android:name=".Activity_Splash">
+        <activity android:name=".Activity_Splash"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsUtils.MapsActivity"
+            android:noHistory="true" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Activity_Registration" />
+        <activity android:name=".CameraActivity.CameraActivity" />
+        <activity android:name=".NoteVoiceOptional.NoteVoiceActivity" />
+        <activity android:name=".Activity_Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".LocationUpdateService"
+
+        <service
+            android:name=".LocationUpdateService"
             android:enabled="true"
-            android:exported="true"
-            />
+            android:exported="true" />
+
         <receiver
             android:name=".LocationBroadcastReciever"
             android:enabled="true"
             android:exported="true"
-            android:label="RestartServiceWhenStopped">
-        </receiver>
+            android:label="RestartServiceWhenStopped"></receiver>
     </application>
 
 </manifest>

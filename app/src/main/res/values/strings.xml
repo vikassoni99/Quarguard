@@ -15,8 +15,6 @@
 
     <string name="location_updated">Location Updated: %1$s</string>
 
-
-
-
+    <string name="google_maps_key">AIzaSyC_NBFp9WLbMlUtsxBDy-sQvNRPPTTfMGc</string>
 </resources>
 

@@ -19,6 +19,13 @@ public interface RegisterAPI {
             @Field("authorization") String authorization,
             Callback<Response> callback);
 
+    @FormUrlEncoded
+    @POST("/api/v1/upload/location")
+    public void insertQurantineLocation(
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("authorization") String authorization,
+            Callback<Response> callback);
 
 
     @FormUrlEncoded

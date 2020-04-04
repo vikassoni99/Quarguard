@@ -13,6 +13,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.quarguard.MainActivity;
@@ -50,11 +51,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Marker mCurrLocationMarker;
     private String lat,lng;
     private String access;
+    Button btn_mapOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        btn_mapOk=findViewById(R.id.Btn_MapOk);
 
 
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);

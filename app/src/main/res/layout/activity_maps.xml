@@ -16,4 +16,17 @@
             map:cameraZoom="1"
             tools:context=".MainActivity" />
 
+        <Button
+            android:id="@+id/Btn_MapOk"
+            android:layout_width="120dp"
+            android:layout_height="36dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="120dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_bg"
+            android:text="NEXT"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            />
+
 </FrameLayout>

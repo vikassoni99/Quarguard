@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements
     private boolean mBound = false;
 
     // UI elements.
-    Button mRequestLocationUpdatesButton;
-    Button mRemoveLocationUpdatesButton;
-    Button btn_panicMode,btn_locateme,btn_logout;
+    Button btn_locateme,btn_logout;
     CardView card_panic;
     static String check="000";
+    CardView card_startTracking;
+    CardView card_stopTracking;
 
 
     // Monitors the state of the connection to the service.
@@ -102,10 +102,11 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         myReceiver = new MyReceiver();
         setContentView(R.layout.activity_main);
-        btn_panicMode = findViewById(R.id.btn_panic_mode);
         btn_locateme = findViewById(R.id.btn_location_1_hr);
         btn_logout = findViewById(R.id.btnLogout);
         card_panic=findViewById(R.id.Card_Panic);
+        card_startTracking=findViewById(R.id.Card_StartTracking);
+        card_stopTracking=findViewById(R.id.Card_StopTracking);
 
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
@@ -124,14 +125,6 @@ public class MainActivity extends AppCompatActivity implements
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
         access = prefs.getString("token", "");//"No name defined" is the default value.
 
-
-        btn_panicMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                startActivity(intent);
-            }
-        });
 
         card_panic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,10 +253,7 @@ public class MainActivity extends AppCompatActivity implements
 //        PreferenceManager.getDefaultSharedPreferences(this)
 //                .registerOnSharedPreferenceChangeListener(this);
 
-        mRequestLocationUpdatesButton = (Button) findViewById(R.id.request_location_updates_button);
-        mRemoveLocationUpdatesButton = (Button) findViewById(R.id.remove_location_updates_button);
-
-        mRequestLocationUpdatesButton.setOnClickListener(new View.OnClickListener() {
+        card_startTracking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!checkPermissions()) {
@@ -274,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        mRemoveLocationUpdatesButton.setOnClickListener(new View.OnClickListener() {
+        card_stopTracking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mService.removeLocationUpdates();
@@ -536,11 +526,11 @@ public class MainActivity extends AppCompatActivity implements
 
     private void setButtonsState(boolean requestingLocationUpdates) {
         if (requestingLocationUpdates) {
-            mRequestLocationUpdatesButton.setEnabled(false);
-            mRemoveLocationUpdatesButton.setEnabled(true);
+            card_startTracking.setEnabled(false);
+            card_stopTracking.setEnabled(true);
         } else {
-            mRequestLocationUpdatesButton.setEnabled(true);
-            mRemoveLocationUpdatesButton.setEnabled(false);
+            card_startTracking.setEnabled(true);
+            card_stopTracking.setEnabled(false);
         }
     }
 

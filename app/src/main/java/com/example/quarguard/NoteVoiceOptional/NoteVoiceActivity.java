@@ -1,6 +1,7 @@
 package com.example.quarguard.NoteVoiceOptional;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -48,6 +49,12 @@ public class NoteVoiceActivity extends Activity {
     private static String mFileName = null;
     public static final int REQUEST_AUDIO_PERMISSION_CODE = 1;
     String access;
+
+    CardView card_recStart;
+    CardView card_recStop;
+    CardView card_play;
+    CardView card_stop;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +70,11 @@ public class NoteVoiceActivity extends Activity {
         stopplay.setEnabled(false);
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
         mFileName += "/AudioRecording.3gp";
+
+        card_recStart=findViewById(R.id.Card_RecStart);
+        card_recStop=findViewById(R.id.Card_RecStop);
+        card_play=findViewById(R.id.Card_Play);
+        card_stop=findViewById(R.id.Card_Stop);
 
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
         access = prefs.getString("token", "");//"No name defined" is the default value.
@@ -121,7 +133,7 @@ public class NoteVoiceActivity extends Activity {
             }
         });
 
-        startbtn.setOnClickListener(new View.OnClickListener() {
+        card_recStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(CheckPermissions()) {
@@ -148,7 +160,7 @@ public class NoteVoiceActivity extends Activity {
                 }
             }
         });
-        stopbtn.setOnClickListener(new View.OnClickListener() {
+        card_recStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopbtn.setEnabled(false);
@@ -162,7 +174,7 @@ public class NoteVoiceActivity extends Activity {
             }
         });
 
-        playbtn.setOnClickListener(new View.OnClickListener() {
+        card_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopbtn.setEnabled(false);
@@ -180,7 +192,7 @@ public class NoteVoiceActivity extends Activity {
                 }
             }
         });
-        stopplay.setOnClickListener(new View.OnClickListener() {
+        card_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPlayer.release();

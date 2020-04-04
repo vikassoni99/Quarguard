@@ -24,7 +24,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key"/>
 
         <activity
             android:name=".MapsUtils.MapsActivity"
@@ -34,6 +34,7 @@
         <activity android:name=".CameraActivity.CameraActivity" />
         <activity android:name=".NoteVoiceOptional.NoteVoiceActivity" />
         <activity android:name=".Activity_Splash">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

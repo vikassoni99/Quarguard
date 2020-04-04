@@ -3,6 +3,7 @@ package com.example.quarguard.CameraActivity;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -46,7 +47,6 @@ public class CameraActivity extends Activity
     private static final String ROOT_URL = "https://quarguard.herokuapp.com";
     final int CAMERA_REQUEST = 1888;
     ImageView imageView;
-    Button photoButton,voice_note;
     final int MY_CAMERA_PERMISSION_CODE = 100;
     Bitmap photo;
     String access;
@@ -65,6 +65,8 @@ public class CameraActivity extends Activity
     Button Btn_SendSymptomsPanic;
     private String temp;
 
+    CardView card_clickPicture,card_voiceNote;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -72,10 +74,7 @@ public class CameraActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-
         imageView = findViewById(R.id.img_imageview);
-        voice_note = findViewById(R.id.btn_voiceNote);
-        photoButton = findViewById(R.id.btn_capture);
         btn_sendEmergencyMessage = findViewById(R.id.Btn_sendEmergencyMsg);
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
         access = prefs.getString("token", "");//"No name defined" is the default value.
@@ -85,6 +84,8 @@ public class CameraActivity extends Activity
         GrpFeverP = findViewById(R.id.radioGrpFeverP);
         GrpHeadacheP = findViewById(R.id.radioGrpHeadacheP);
         Btn_SendSymptomsPanic=findViewById(R.id.Btn_Send_Symptoms);
+        card_clickPicture=findViewById(R.id.Card_ClickPicture);
+        card_voiceNote=findViewById(R.id.Card_VoiceNote);
 
         //Radio Group
         GrpCoughP.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -159,7 +160,7 @@ public class CameraActivity extends Activity
 
 
 
-        voice_note.setOnClickListener(new View.OnClickListener() {
+        card_voiceNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CameraActivity.this, NoteVoiceActivity.class);
@@ -168,7 +169,7 @@ public class CameraActivity extends Activity
         });
 
 
-        photoButton.setOnClickListener(new View.OnClickListener()
+        card_clickPicture.setOnClickListener(new View.OnClickListener()
         {
 
             @Override

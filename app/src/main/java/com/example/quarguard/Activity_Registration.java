@@ -291,9 +291,10 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                     TxtLayPasswordSignup.setError(null);
 
                     if (latitude != null && longitude != null) {
+                        Toast.makeText(Activity_Registration.this, "Location Available", Toast.LENGTH_SHORT).show();
                         registerUser();
                     } else {
-                        Toast.makeText(Activity_Registration.this, "Please on your location", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Activity_Registration.this, "Please on your location (GPS)", Toast.LENGTH_SHORT).show();
                         PermissionListener permissionlistener = new PermissionListener() {
                             @Override
                             public void onPermissionGranted() {

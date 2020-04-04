@@ -79,7 +79,7 @@ public class CameraActivity extends Activity
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
         access = prefs.getString("token", "");//"No name defined" is the default value.
         edt_emergency = findViewById(R.id.edt_emergency_msg);
-        Toast.makeText(this, access, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, access, Toast.LENGTH_SHORT).show();
         GrpCoughP = findViewById(R.id.radioGrpCoughP);
         GrpFeverP = findViewById(R.id.radioGrpFeverP);
         GrpHeadacheP = findViewById(R.id.radioGrpHeadacheP);
@@ -237,7 +237,7 @@ public class CameraActivity extends Activity
                 .build();
 
         RegisterAPI api = adapter.create(RegisterAPI.class);
-        Toast.makeText(this, access, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, access, Toast.LENGTH_SHORT).show();
         api.uploadPhoto(
                 temp,
                 access,

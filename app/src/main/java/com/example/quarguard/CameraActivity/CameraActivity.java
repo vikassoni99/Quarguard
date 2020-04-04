@@ -20,6 +20,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.quarguard.Activity_Login;
@@ -51,6 +53,17 @@ public class CameraActivity extends Activity
     TextInputEditText edt_emergency;
     private View btn_sendEmergencyMessage;
 
+    //RadioGroup
+    RadioGroup GrpCoughP;
+    RadioGroup GrpFeverP;
+    RadioGroup GrpHeadacheP;
+
+    String strCoughP= "";
+    String strFeverP= "";
+    String strHeadacheP= "";
+
+    Button Btn_SendSymptomsPanic;
+
 
 
     @Override
@@ -67,6 +80,65 @@ public class CameraActivity extends Activity
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
         access = prefs.getString("token", "");//"No name defined" is the default value.
         edt_emergency = findViewById(R.id.edt_emergency_msg);
+
+        GrpCoughP = findViewById(R.id.radioGrpCoughP);
+        GrpFeverP = findViewById(R.id.radioGrpFeverP);
+        GrpHeadacheP = findViewById(R.id.radioGrpHeadacheP);
+        Btn_SendSymptomsPanic=findViewById(R.id.Btn_Send_Symptoms);
+
+        //Radio Group
+        GrpCoughP.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.CoughPYes:
+                        strCoughP = "1";
+                        break;
+                    case R.id.CoughPNo:
+                        strCoughP = "0";
+                        break;
+                }
+            }
+        });
+
+        GrpFeverP.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.FeverPYes:
+                        strFeverP = "1";
+                        break;
+                    case R.id.FeverPNo:
+                        strFeverP= "0";
+                        break;
+                }
+            }
+        });
+
+        GrpHeadacheP.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.HeadachePYes:
+                        strHeadacheP = "1";
+                        break;
+                    case R.id.HeadachePNo:
+                        strHeadacheP = "0";
+                        break;
+                }
+            }
+        });
+
+        //Button SendSymptoms(Radio)
+        Btn_SendSymptomsPanic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(CameraActivity.this,strCoughP+strFeverP+strHeadacheP,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //Button Send Emergency Message
         btn_sendEmergencyMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

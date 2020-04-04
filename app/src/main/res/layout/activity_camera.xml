@@ -137,7 +137,7 @@
 
 
             <RadioGroup
-                android:id="@+id/radioGrpCough"
+                android:id="@+id/radioGrpCoughP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -145,10 +145,10 @@
                 app:layout_constraintStart_toEndOf="@id/line_midRadio"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/radioGrpFever">
+                app:layout_constraintBottom_toTopOf="@+id/radioGrpFeverP">
 
                 <RadioButton
-                    android:id="@+id/CoughYes"
+                    android:id="@+id/CoughPYes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes"
@@ -156,7 +156,7 @@
                     android:textSize="12dp" />
 
                 <RadioButton
-                    android:id="@+id/CoughNo"
+                    android:id="@+id/CoughPNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No"
@@ -167,18 +167,18 @@
             </RadioGroup>
 
             <RadioGroup
-                android:id="@+id/radioGrpFever"
+                android:id="@+id/radioGrpFeverP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="4dp"
                 app:layout_constraintStart_toEndOf="@id/line_midRadio"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGrpCough"
-                app:layout_constraintBottom_toTopOf="@+id/radioGrpHeadache">
+                app:layout_constraintTop_toBottomOf="@+id/radioGrpCoughP"
+                app:layout_constraintBottom_toTopOf="@+id/radioGrpHeadacheP">
 
                 <RadioButton
-                    android:id="@+id/FeverYes"
+                    android:id="@+id/FeverPYes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes"
@@ -186,7 +186,7 @@
                     android:textSize="12dp" />
 
                 <RadioButton
-                    android:id="@+id/FeverNo"
+                    android:id="@+id/FeverPNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No"
@@ -197,7 +197,7 @@
             </RadioGroup>
 
             <RadioGroup
-                android:id="@+id/radioGrpHeadache"
+                android:id="@+id/radioGrpHeadacheP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -205,11 +205,11 @@
                 android:layout_marginBottom="4dp"
                 app:layout_constraintStart_toEndOf="@id/line_midRadio"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGrpFever"
+                app:layout_constraintTop_toBottomOf="@+id/radioGrpFeverP"
                 app:layout_constraintBottom_toTopOf="@id/line_bottomRadio">
 
                 <RadioButton
-                    android:id="@+id/HeadacheYes"
+                    android:id="@+id/HeadachePYes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes"
@@ -217,7 +217,7 @@
                     android:textSize="12dp" />
 
                 <RadioButton
-                    android:id="@+id/HeadacheNo"
+                    android:id="@+id/HeadachePNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No"

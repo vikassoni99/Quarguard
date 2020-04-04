@@ -107,13 +107,10 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
     RadioGroup GrpCough;
     RadioGroup GrpFever;
     RadioGroup GrpHeadache;
-    RadioButton RBCough;
 
     String strCough= "";
     String strFever= "";
     String strHeadache= "";
-
-
 
 
     @Override
@@ -157,7 +154,6 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
         GrpCough = findViewById(R.id.radioGrpCough);
         GrpFever = findViewById(R.id.radioGrpFever);
         GrpHeadache = findViewById(R.id.radioGrpHeadache);
-        RBCough=findViewById(R.id.CoughYes);
 
 
         //Signup Button
@@ -252,9 +248,6 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                 }
             }
         });
-
-
-
 
 
 

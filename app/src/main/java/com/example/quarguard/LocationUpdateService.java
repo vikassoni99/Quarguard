@@ -116,7 +116,9 @@ public class LocationUpdateService extends Service {
 
         createLocationRequest();
         getLastLocation();
-
+        if(main == null){
+            main = new MainActivity();
+        }
         HandlerThread handlerThread = new HandlerThread(TAG);
         handlerThread.start();
         mServiceHandler = new Handler(handlerThread.getLooper());

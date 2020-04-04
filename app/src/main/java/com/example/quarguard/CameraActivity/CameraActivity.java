@@ -63,7 +63,7 @@ public class CameraActivity extends Activity
     String strHeadacheP= "";
 
     Button Btn_SendSymptomsPanic;
-
+    private String temp;
 
 
     @Override
@@ -80,7 +80,7 @@ public class CameraActivity extends Activity
         SharedPreferences prefs = getSharedPreferences("tokenPre", MODE_PRIVATE);
         access = prefs.getString("token", "");//"No name defined" is the default value.
         edt_emergency = findViewById(R.id.edt_emergency_msg);
-
+        Toast.makeText(this, access, Toast.LENGTH_SHORT).show();
         GrpCoughP = findViewById(R.id.radioGrpCoughP);
         GrpFeverP = findViewById(R.id.radioGrpFeverP);
         GrpHeadacheP = findViewById(R.id.radioGrpHeadacheP);
@@ -134,6 +134,13 @@ public class CameraActivity extends Activity
             @Override
             public void onClick(View v) {
                 //Toast.makeText(CameraActivity.this,strCoughP+strFeverP+strHeadacheP,Toast.LENGTH_SHORT).show();
+                if(temp!=null && strCoughP!=null && strFeverP!=null && strHeadacheP!=null){
+                    Log.d("access in calling",access);
+                    uploadPhotoApi(access,temp,strHeadacheP,strFeverP,strCoughP);
+                }
+                else{
+                    Toast.makeText(CameraActivity.this, "Please fill out all entries", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -216,23 +223,26 @@ public class CameraActivity extends Activity
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.PNG, 100, baos);
             byte[] b = baos.toByteArray();
-            String temp = Base64.encodeToString(b, Base64.DEFAULT);
-            uploadPhotoApi(access,temp);
+            temp = Base64.encodeToString(b, Base64.DEFAULT);
+           // uploadPhotoApi(access,temp);
         }
     }
 
 
 
-    private void uploadPhotoApi(String access,String temp) {
+    private void uploadPhotoApi(String access,String temp,String head,String fever,String cough) {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ROOT_URL) //Setting the Root URL
                 .build();
 
         RegisterAPI api = adapter.create(RegisterAPI.class);
-
+        Toast.makeText(this, access, Toast.LENGTH_SHORT).show();
         api.uploadPhoto(
                 temp,
                 access,
+                head,
+                fever,
+                cough,
                 new Callback<Response>() {
                     @Override
                     public void success(Response response, Response response2) {

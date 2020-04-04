@@ -42,7 +42,10 @@ public interface RegisterAPI {
     public void uploadPhoto(
             @Field("file") String file,
             @Field("authorization") String authorization,
-            Callback<Response> callback
+            @Field("cough") String cough,
+            @Field("fever") String fever,
+            @Field("breathing") String breathing,
+                    Callback<Response> callback
             );
 
     @FormUrlEncoded
@@ -98,5 +101,8 @@ public interface RegisterAPI {
             @Field("breathing") String breathing,
             Callback<Response> callback
     );
+
+
+
 
 }

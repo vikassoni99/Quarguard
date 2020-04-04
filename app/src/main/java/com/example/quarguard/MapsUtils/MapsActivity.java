@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -69,6 +70,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        View parentLayout = findViewById(android.R.id.content);
+        Snackbar.make(parentLayout, "Please Tap to set your Quarantine location", Snackbar.LENGTH_INDEFINITE)
+                .setAction("CLOSE", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(MapsActivity.this, "If you find location faulty then please tap on right top corner to locate you", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                .show();
         btn_mapOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +126,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                googleMap.clear();
                 googleMap.addMarker(new MarkerOptions().position(latLng));
+
                  lat = String.valueOf(latLng.latitude);
                  lng = String.valueOf(latLng.longitude);
                 Toast.makeText(MapsActivity.this, lat+" "+lng, Toast.LENGTH_SHORT).show();

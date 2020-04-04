@@ -62,6 +62,7 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
     Button loginBtn;
     TextView txtViewDate;
     Calendar cal;
+    int year,month,day;
     DatePickerDialog datePickerDialog;
     Spinner genderSpinner;
     Spinner statusSpinner;
@@ -77,6 +78,18 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
     TextInputEditText edtAddress;
     TextInputEditText edtTravelHistory;
     TextInputEditText edtPasswordSignup;
+
+    TextInputLayout TxtLayPatientname;
+    TextInputLayout TxtLayFamilyname;
+    TextInputLayout TxtLayMobileNumberSignup;
+    TextInputLayout TxtLayAlternateNumber;
+    TextInputLayout TxtLayAge;
+    TextInputLayout TxtLayNationality;
+    TextInputLayout TxtLayState;
+    TextInputLayout TxtLayCity;
+    TextInputLayout TxtLayBlock;
+    TextInputLayout TxtLayAddress;
+    TextInputLayout TxtLayPasswordSignup;
     //all string values (15)
     String strPatientName = "";
     String strFamilyName= "";
@@ -122,6 +135,18 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
         loginBtn = findViewById(R.id.TextBtn_login);
         txtViewDate = findViewById(R.id.textFieldDate);
 
+        TxtLayPatientname=findViewById(R.id.textFieldPatientName);
+        TxtLayFamilyname=findViewById(R.id.textFieldFamilyName);
+        TxtLayMobileNumberSignup=findViewById(R.id.textFieldMobileNumber);
+        TxtLayAlternateNumber=findViewById(R.id.textFieldAlternateNumber);
+        TxtLayAge=findViewById(R.id.textFieldAge);
+        TxtLayNationality=findViewById(R.id.textFieldNationality);
+        TxtLayState=findViewById(R.id.textFieldState);
+        TxtLayCity=findViewById(R.id.textFieldCity);
+        TxtLayBlock=findViewById(R.id.textFieldBlock);
+        TxtLayAddress=findViewById(R.id.textFieldAddress);
+        TxtLayPasswordSignup=findViewById(R.id.textFieldPassword);
+
 
 
         createBtn = findViewById(R.id.Btn_CreateAcc);
@@ -156,7 +181,6 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
         GrpFever = findViewById(R.id.radioGrpFever);
         GrpHeadache = findViewById(R.id.radioGrpHeadache);
 
-
         //Signup Button
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,27 +204,115 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                 strPasswordSignup = edtPasswordSignup.getText().toString();
                 //Toast.makeText(getApplicationContext(),strGender+"  "+strStatus+" "+strDate,Toast.LENGTH_SHORT).show();
                 Toast.makeText(Activity_Registration.this, latitude, Toast.LENGTH_SHORT).show();
-                if (latitude != null && longitude != null) {
-                    registerUser();
-                } else {
-                    Toast.makeText(Activity_Registration.this, "Please on your location", Toast.LENGTH_SHORT).show();
-                    PermissionListener permissionlistener = new PermissionListener() {
-                        @Override
-                        public void onPermissionGranted() {
-                            Toast.makeText(Activity_Registration.this, "Location Allowed", Toast.LENGTH_SHORT).show();
-                        }
+                //latitude != null && longitude != null
+                if(strPatientName.isEmpty() || strFamilyName.isEmpty() || strMobileNumber.isEmpty() || strAlternateNumber.isEmpty() ||
+                strAge.isEmpty() || strNationality.isEmpty() || strState.isEmpty() || strCity.isEmpty() || strBlock.isEmpty() ||
+                        strAddress.isEmpty() || strPasswordSignup.isEmpty() ||strDate.isEmpty() || strCough.isEmpty() || strFever.isEmpty() || strHeadache.isEmpty())
+                {
+                    //Toast.makeText(getApplicationContext()," "+strDate+strCough+strFever+strHeadache,Toast.LENGTH_SHORT).show();
+                    if (strDate.isEmpty()){
+                        Toast.makeText(getApplicationContext(),"Select date of admit",Toast.LENGTH_SHORT).show();
+                    }
+                    if (strCough.isEmpty() || strFever.isEmpty() || strHeadache.isEmpty()){
+                        Toast.makeText(getApplicationContext(),"Select Symptoms",Toast.LENGTH_SHORT).show();
+                    }
+                    if (strPatientName.isEmpty()){
+                        TxtLayPatientname.setError("This field can't be empty");
+                    }else{
+                        TxtLayPatientname.setError(null);
+                    }
 
-                        @Override
-                        public void onPermissionDenied(List<String> deniedPermissions) {
-                            Toast.makeText(Activity_Registration.this, "Please on your location(GPS)", Toast.LENGTH_SHORT).show();
-                        }
-                    };
-                    TedPermission.with(Activity_Registration.this)
-                            .setPermissionListener(permissionlistener)
-                            .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-                            .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION)
-                            .check();
+                    if (strFamilyName.isEmpty()){
+                        TxtLayFamilyname.setError("This field can't be empty");
+                    }else{
+                        TxtLayFamilyname.setError(null);
+                    }
+                    if (strMobileNumber.isEmpty()){
+                        TxtLayMobileNumberSignup.setError("This field can't be empty");
+                    }else{
+                        TxtLayMobileNumberSignup.setError(null);
+                    }
+                    if (strAlternateNumber.isEmpty()){
+                        TxtLayAlternateNumber.setError("This field can't be empty");
+                    }else{
+                        TxtLayAlternateNumber.setError(null);
+                    }
+                    if (strAge.isEmpty()){
+                        TxtLayAge.setError("This field can't be empty");
+                    }else{
+                        TxtLayAge.setError(null);
+                    }
+                    if (strNationality.isEmpty()){
+                        TxtLayNationality.setError("This field can't be empty");
+                    }else{
+                        TxtLayNationality.setError(null);
+                    }
+                    if (strState.isEmpty()){
+                        TxtLayState.setError("This field can't be empty");
+                    }else{
+                        TxtLayState.setError(null);
+                    }
+                    if (strCity.isEmpty()){
+                        TxtLayCity.setError("This field can't be empty");
+                    }else{
+                        TxtLayCity.setError(null);
+                    }
+                    if (strBlock.isEmpty()){
+                        TxtLayBlock.setError("This field can't be empty");
+                    }else{
+                        TxtLayBlock.setError(null);
+                    }
+                    if (strAddress.isEmpty()){
+                        TxtLayAddress.setError("This field can't be empty");
+                    }else{
+                        TxtLayAddress.setError(null);
+                    }
+                    if (strPasswordSignup.isEmpty()){
+                        TxtLayPasswordSignup.setError("This field can't be empty");
+                    }else if(strPasswordSignup.length()<6){
+                        TxtLayPasswordSignup.setError("Minimum 6 alphabets required");
+                    }else{
+                        TxtLayPasswordSignup.setError(null);
+                    }
+
                 }
+                else
+                    {
+                    TxtLayPatientname.setError(null);
+                    TxtLayFamilyname.setError(null);
+                    TxtLayMobileNumberSignup.setError(null);
+                    TxtLayAlternateNumber.setError(null);
+                    TxtLayAge.setError(null);
+                    TxtLayNationality.setError(null);
+                    TxtLayState.setError(null);
+                    TxtLayCity.setError(null);
+                    TxtLayBlock.setError(null);
+                    TxtLayAddress.setError(null);
+                    TxtLayPasswordSignup.setError(null);
+
+                    if (latitude != null && longitude != null) {
+                        registerUser();
+                    } else {
+                        Toast.makeText(Activity_Registration.this, "Please on your location", Toast.LENGTH_SHORT).show();
+                        PermissionListener permissionlistener = new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted() {
+                                Toast.makeText(Activity_Registration.this, "Location Allowed", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onPermissionDenied(List<String> deniedPermissions) {
+                                Toast.makeText(Activity_Registration.this, "Please on your location(GPS)", Toast.LENGTH_SHORT).show();
+                            }
+                        };
+                        TedPermission.with(Activity_Registration.this)
+                                .setPermissionListener(permissionlistener)
+                                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                                .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION)
+                                .check();
+                    }
+                }
+
             }
         });
 
@@ -286,22 +398,20 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
         });
 
         //Date Picker for admit
+        cal=Calendar.getInstance();
+        year=cal.get(Calendar.YEAR);
+        month=cal.get(Calendar.MONTH);
+        day=cal.get(Calendar.DAY_OF_MONTH);
         txtViewDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cal=Calendar.getInstance();
-                int day=cal.get(Calendar.DAY_OF_MONTH);
-                int month=cal.get(Calendar.MONTH);
-                int year=cal.get(Calendar.YEAR);
-
                 datePickerDialog=new DatePickerDialog(Activity_Registration.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
                         strDate=mYear+"-"+(mMonth+1)+"-"+mDay;
                         txtViewDate.setText(strDate);
-
                     }
-                },day,month,year);
+                },year,month,day);
                 datePickerDialog.show();
             }
         });

@@ -141,6 +141,7 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
         edtTravelHistory = findViewById(R.id.EdtTravelHistory);
         edtPasswordSignup = findViewById(R.id.EdtPasswordSignup);
 
+
         final List<String> genderList = new ArrayList();
         genderList.add("Men");
         genderList.add("Women");
@@ -182,6 +183,7 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                 if (latitude != null && longitude != null) {
                     registerUser();
                 } else {
+                    Toast.makeText(Activity_Registration.this, "Please on your location", Toast.LENGTH_SHORT).show();
                     PermissionListener permissionlistener = new PermissionListener() {
                         @Override
                         public void onPermissionGranted() {
@@ -198,8 +200,6 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                             .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
                             .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION)
                             .check();
-
-                    Toast.makeText(Activity_Registration.this, "Please on your location", Toast.LENGTH_SHORT).show();
                 }
             }
         });

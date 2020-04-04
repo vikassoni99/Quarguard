@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quarguard.MapsUtils.MapsActivity;
 import com.example.quarguard.RetrofitAPI.RegisterAPI;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class Activity_Login extends AppCompatActivity {
     Button loginBtn;
     TextInputEditText phone_number,pass_word;
     String phoneNumber,password;
+    TextInputLayout TxtLayPhone,TxtLayPass;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,9 @@ public class Activity_Login extends AppCompatActivity {
         loginBtn=findViewById(R.id.Btn_Login);
         phone_number = findViewById(R.id.edt_phone_number);
         pass_word = findViewById(R.id.edt_password);
+
+        TxtLayPhone=findViewById(R.id.textFieldPhone);
+        TxtLayPass=findViewById(R.id.textFieldPassword);
 
         createNewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,11 +59,22 @@ public class Activity_Login extends AppCompatActivity {
             public void onClick(View v) {
                 phoneNumber = phone_number.getText().toString();
                 password = pass_word.getText().toString();
-                if(phoneNumber!=null && password!=null){
-                    loginUser();
+                if(phoneNumber.isEmpty() || password.isEmpty()){
+                    if(phoneNumber.isEmpty()){
+                        TxtLayPhone.setError("Please enter registered mobile number");
+                    }else{
+                        TxtLayPhone.setError(null);
+                    }
+                    if(password.isEmpty()){
+                        TxtLayPass.setError("Please enter password");
+                    }else{
+                        TxtLayPass.setError(null);
+                    }
                 }
                 else{
-                    Toast.makeText(Activity_Login.this, "Please Enter the details", Toast.LENGTH_SHORT).show();
+                    TxtLayPhone.setError(null);
+                    TxtLayPass.setError(null);
+                    loginUser();
                 }
 
             }

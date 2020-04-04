@@ -20,7 +20,7 @@ public interface RegisterAPI {
             Callback<Response> callback);
 
     @FormUrlEncoded
-    @POST("/api/v1/upload/location")
+    @POST("/api/v1/changequarantinelocation")
     public void insertQurantineLocation(
             @Field("latitude") String latitude,
             @Field("longitude") String longitude,

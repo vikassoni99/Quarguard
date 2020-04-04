@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.quarguard.CameraActivity.CameraActivity;
+import com.example.quarguard.MapsUtils.MapsActivity;
 import com.example.quarguard.RetrofitAPI.RegisterAPI;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -373,8 +374,7 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                     public void success(Response response, Response response2) {
                         Toast.makeText(Activity_Registration.this, "Uploaded successfully", Toast.LENGTH_SHORT).show();
                         BufferedReader reader = null;
-                        Intent intent_registerToMain =new  Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent_registerToMain);
+
                         //An string to store output from the server
                         String output = "";
 
@@ -387,10 +387,13 @@ public class Activity_Registration extends AppCompatActivity implements GoogleAp
                             SharedPreferences.Editor editor = getSharedPreferences("tokenPre", MODE_PRIVATE).edit();
                             editor.putString("token", output);
                             editor.apply();
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
 
+                        Intent intent_registerToMain =new  Intent(getApplicationContext(), MapsActivity.class);
+                        startActivity(intent_registerToMain);
                         //Displaying the output as a toast
                         //Log.d("result",output);
 

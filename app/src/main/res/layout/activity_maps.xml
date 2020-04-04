@@ -14,11 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             map:cameraZoom="1"
-            tools:context=".MainActivity" />
+            tools:context=".MainActivity"/>
 
         <Button
             android:id="@+id/Btn_MapOk"
-            android:layout_width="120dp"
+            android:layout_width="124dp"
             android:layout_height="36dp"
             android:layout_gravity="top"
             android:layout_marginStart="200dp"

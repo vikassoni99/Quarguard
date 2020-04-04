@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quarguard.MapsUtils.MapsActivity;
 import com.example.quarguard.RetrofitAPI.RegisterAPI;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -90,9 +91,9 @@ public class Activity_Login extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
-                        Intent intent_loginToMain =new  Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent_loginToMain);
+                        quarantinecheck(output);
+//                        Intent intent_loginToMain =new  Intent(getApplicationContext(),MainActivity.class);
+//                        startActivity(intent_loginToMain);
                         //Displaying the output as a toast
                         //Log.d("result",output);
                         SharedPreferences.Editor editor = getSharedPreferences("tokenPre", MODE_PRIVATE).edit();
@@ -107,6 +108,59 @@ public class Activity_Login extends AppCompatActivity {
                 }
         );
     }
+
+    private void quarantinecheck(String access) {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(ROOT_URL) //Setting the Root URL
+                .build();
+
+        RegisterAPI api = adapter.create(RegisterAPI.class);
+
+        api.checkQuarantine(
+                access,
+                new Callback<Response>() {
+                    @Override
+                    public void success(Response response, Response response2) {
+                        BufferedReader reader = null;
+
+                        //An string to store output from the server
+                        String output = "";
+
+                        try {
+                            //Initializing buffered reader
+                            reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
+
+                            //Reading the output in the string
+                            output = reader.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (Integer.parseInt(output) == 0){
+                            SharedPreferences.Editor editor = getSharedPreferences("tokenPre", MODE_PRIVATE).edit();
+                            editor.putString("token", access);
+                            editor.apply();
+                            Intent i = new Intent(Activity_Login.this,MapsActivity.class);
+                            startActivity(i);
+                        }
+                        else{
+                            SharedPreferences.Editor editor = getSharedPreferences("tokenPre", MODE_PRIVATE).edit();
+                            editor.putString("token", access);
+                            editor.apply();
+                            Intent i = new Intent(Activity_Login.this, MainActivity.class);
+                            startActivity(i);
+                        }
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(Activity_Login.this, String.valueOf(error), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
     @Override
     public void onBackPressed(){
         Intent a = new Intent(Intent.ACTION_MAIN);

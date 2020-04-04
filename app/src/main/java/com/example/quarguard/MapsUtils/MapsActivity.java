@@ -13,6 +13,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -68,6 +69,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        btn_mapOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lat!=null && lng!=null){
+                    insertLocation(lat,lng);
+                }
+                else{
+                    Toast.makeText(MapsActivity.this, "Please Tap on map to select your quarantine location", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -105,7 +118,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 googleMap.addMarker(new MarkerOptions().position(latLng));
                  lat = String.valueOf(latLng.latitude);
                  lng = String.valueOf(latLng.longitude);
-                 insertLocation(lat,lng);
                 Toast.makeText(MapsActivity.this, lat+" "+lng, Toast.LENGTH_SHORT).show();
             }
         });

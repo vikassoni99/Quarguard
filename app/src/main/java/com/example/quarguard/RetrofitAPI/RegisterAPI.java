@@ -75,6 +75,13 @@ public interface RegisterAPI {
             Callback<Response> callback
     );
 
+    @FormUrlEncoded
+    @POST("/api/v1/checkquarantinelocation")
+    public void checkQuarantine(
+            @Field("authorization") String authorization,
+            Callback<Response> callback
+    );
+
 
     @FormUrlEncoded
     @POST("/api/v1/register")
